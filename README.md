@@ -53,3 +53,27 @@ dev_uninject_plugin dsh-oc-faker   # fiber 全清理，fetch/dispatcher/agent �
 
 `~/.dsh/ua-spoof.json`（不存在则不落盘；改动即写，原子替换）。优先级：
 默认值 < 环境变量 `DSH_UA` / `DSH_UA_MODE` < 插件 config < 持久化文件。
+
+## 官方插件命令安装（bundle 装配）
+
+本包是标准 DSH 插件包，支持官方 `dsh plugin` 通道安装（重启后由 profile bundles 自动装配）：
+
+```bash
+# 从本地目录（已注入/热装过的场景）
+dsh plugin --profile web add /path/to/dsh-oc-faker
+
+# 从 GitHub 仓库
+dsh plugin --profile web add github:Ajwyunsx/dsh-oc-faker
+
+# 或经注入器一步落盘为官方 bundle（免重启生效，重启后官方接管）
+dev_install_package /path/to/dsh-oc-faker
+```
+
+装好后 `~/.dsh/profiles/web/package.json` 会包含：
+
+```json
+"dependencies": { "dsh-oc-faker": "link:/path/to/dsh-oc-faker" },
+"dsh": { "profile": { "bundles": [ "...", "dsh-oc-faker" ] } }
+```
+
+当前环境已按此方式装配完毕，运行时由 loader entry 提供（`dev_ua_status` 可验证），重启后由 bundles 列表官方接管，无需再手动注入。
