@@ -1,0 +1,6 @@
+# dsh-oc-faker bundle 层：插入插件行。
+# 声明 dsh.bundle.patch 后，`dsh plugin add` 会把本包激活为 profile 层。
+- insert:
+    - id: dsh-oc-faker
+      name: 'dsh-oc-faker'
+      config: {}
