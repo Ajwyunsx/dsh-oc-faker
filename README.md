@@ -109,3 +109,15 @@ pnpm add dsh-oc-faker
 
 三种安装通道等价：npm registry（`dsh-oc-faker`）/ GitHub git（`github:Ajwyunsx/dsh-oc-faker`）/ 本地目录（`link:`）。包内含
 `dsh.bundle.patch` 声明，`dsh plugin add` 一律自动激活为 profile 层。
+
+## 排错：ERR_PNPM_ADDING_TO_ROOT
+
+官方 `dsh plugin add` 会把 pnpm 透传到 profile（profile 本身是 pnpm workspace root）。
+pnpm 11 会提示在 workspace root 加依赖需 `-w`。官方转发层不带 `-w`，解决方式：
+在 profile 的 `pnpm-workspace.yaml` 顶层声明（已在本机 web profile 配置好）：
+
+```yaml
+ignoreWorkspaceRootCheck: true
+```
+
+之后 `dsh plugin --profile web add dsh-oc-faker` 直接可用，无需任何附加参数。
