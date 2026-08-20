@@ -1,6 +1,6 @@
 {
   "name": "dsh-oc-faker",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "DSH 全局 User-Agent 伪装：把宿主进程所有出站 HTTP 请求的 UA 替换为可配置值（默认 opencode），绕过服务端 user-agent 校验；附 dev_ua_status / dev_ua_set / dev_ua_test 三件套运行时管理与验证。零依赖、纯 JS、卸载即净。",
   "private": false,
   "type": "module",
