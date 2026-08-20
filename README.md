@@ -77,3 +77,19 @@ dev_install_package /path/to/dsh-oc-faker
 ```
 
 当前环境已按此方式装配完毕，运行时由 loader entry 提供（`dev_ua_status` 可验证），重启后由 bundles 列表官方接管，无需再手动注入。
+
+## 官方在线安装（已实测验证）
+
+仓库已声明 `dsh.bundle.patch` 元数据（package.json + 自带的 cordis.patch.yml），
+官方命令会把它自动激活为 profile 层（bundle），不是"普通依赖"：
+
+```bash
+# 任意外部 DSH 实例在线安装（实测通过，6 秒 clone 完成）
+dsh plugin --profile web add github:Ajwyunsx/dsh-oc-faker
+```
+
+装完 `~/.dsh/profiles/<name>/package.json` 的 `dsh.profile.bundles` 会自动包含
+`dsh-oc-faker`，重启后由官方 bundle 装配加载。更新走同一命令（`add` 或 `update`）。
+
+> 注意：不带 `dsh.bundle` 声明的包会被 `dsh plugin` 的 reconcile 机制当作"普通依赖"
+> 而非 profile 层（官方会打印 warning）。本包 v0.1.1 起已满足 bundle 声明要求。
