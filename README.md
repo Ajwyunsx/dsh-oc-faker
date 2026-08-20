@@ -93,3 +93,19 @@ dsh plugin --profile web add github:Ajwyunsx/dsh-oc-faker
 
 > 注意：不带 `dsh.bundle` 声明的包会被 `dsh plugin` 的 reconcile 机制当作"普通依赖"
 > 而非 profile 层（官方会打印 warning）。本包 v0.1.1 起已满足 bundle 声明要求。
+
+## npm registry 安装（已发布）
+
+包已发布到 npm：**`dsh-oc-faker` v0.1.1**（https://www.npmjs.com/package/dsh-oc-faker）
+
+```bash
+# 官方命令走 npm registry 在线安装（实测通过，bundles 自动激活）
+dsh plugin --profile web add dsh-oc-faker
+
+# 或任意 Node 项目直接引用
+npm install dsh-oc-faker
+pnpm add dsh-oc-faker
+```
+
+三种安装通道等价：npm registry（`dsh-oc-faker`）/ GitHub git（`github:Ajwyunsx/dsh-oc-faker`）/ 本地目录（`link:`）。包内含
+`dsh.bundle.patch` 声明，`dsh plugin add` 一律自动激活为 profile 层。
